@@ -1,36 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
-const memberController = require('./Controller/subscriberController')
+const memberRoutes = require('./Route/userRoute');
+const cors = require('cors');
 
 require('dotenv').config();
 
-mongoose.connect('mongodb+srv://sara:D4agHCYc69xNU8Ey@cluster0.l5nnz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/members');
- 
-const db = mongoose.connection;
-
-db.on('error', (error) => {
-    console.log(error);
-})
-
-db.once('open', () => {
-    console.log('Database Connection Established!');
+mongoose.connect('mongodb+srv://sara:D4agHCYc69xNU8Ey@cluster0.l5nnz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/Members', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
 
-const PORT = process.env.port || 8000
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => console.log('Database Connection Established!'));
+
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send('Welcome Home!');
-})
+app.get('/', (req, res) => res.send('Welcome Home!'));
 
-app.listen(PORT, () => {
-    console.log(`App listenting on port ${PORT}`);
-});
+// ✅ Fix: Use the correct router
+app.use('/api', memberRoutes);
 
-app.use('/', memberController);
+app.listen(PORT, () => console.log(`App listening on port ${PORT}`));

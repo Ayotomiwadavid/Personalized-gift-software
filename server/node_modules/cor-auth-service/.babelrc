@@ -1,0 +1,22 @@
+{
+    "env": {
+      "test": {
+        "plugins": ["transform-es2015-modules-commonjs"]
+      },
+      "local": {
+        "plugins": ["transform-es2015-modules-commonjs"]
+      },
+      "sandbox": {
+        "plugins": ["transform-es2015-modules-commonjs"]
+      },
+      "staging": {
+        "plugins": ["transform-es2015-modules-commonjs"]
+      },
+      "dev": {
+        "plugins": ["transform-es2015-modules-commonjs"]
+      },
+      "prod": {
+        "plugins": ["transform-es2015-modules-commonjs"]
+      }
+    }
+  }

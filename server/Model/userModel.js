@@ -7,7 +7,7 @@ const subscribersSchema = new Schema({
         type: String
     },
 
-    email: {
+    phone: {
         type: String
     },
 
@@ -18,8 +18,8 @@ const subscribersSchema = new Schema({
             required: true 
         },
 
-        interests: { 
-            type: [String], 
+        interest: { 
+            type: String, 
             required: true 
         },
     },
